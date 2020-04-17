@@ -1,0 +1,10 @@
+@font-face {
+  font-family: IRANSans;
+  font-style: normal;
+  font-weight: normal;
+  src: url('./Farsi_numerals/webFonts/fonts/eot/IRANSansWeb(FaNum).eot');
+  src: url('./Farsi_numerals/webFonts/fonts/eot/IRANSansWeb(FaNum).eot?#iefix') format('embedded-opentype'),  /* IE6-8 */
+  url('./Farsi_numerals/webFonts/fonts/woff2/IRANSansWeb(FaNum).woff2') format('woff2'),  /* FF39+,Chrome36+, Opera24+*/
+  url('./Farsi_numerals/webFonts/fonts/woff/IRANSansWeb(FaNum).woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+  url('./Farsi_numerals/webFonts/fonts/ttf/IRANSansWeb(FaNum).ttf') format('truetype');
+}

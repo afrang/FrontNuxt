@@ -263,6 +263,12 @@
         mounted() {
             this.listitem();
             this.loadtag();
+        },
+        head () {
+            return {
+                title: this.$t('ArticleGroup'),
+
+            }
         }
 
     }

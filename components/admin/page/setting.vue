@@ -144,6 +144,12 @@
             this.loadsetting();
 
 
+        },
+        head () {
+            return {
+                title: this.$t('setting'),
+
+            }
         }
 
     }

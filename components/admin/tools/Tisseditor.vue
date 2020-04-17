@@ -3,6 +3,7 @@
 
     <no-ssr>
     <modal :key="keys"  height="auto" class="modal-dialog" role="document" name="code">
+
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">
@@ -231,8 +232,9 @@
         data() {
             return {
                 editorConfig: {
-
+                    extraPlugins: ['bidi','justify','colorbutton','autoembed','balloontoolbar']
                 },
+
               //  editorUrl:this.$storage+'js/ckeditor/ckeditor.js',
 
                 vtext:null,

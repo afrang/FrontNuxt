@@ -46,7 +46,7 @@
 
                 localStorage.token ='Bearer '+newName;
                 if(localStorage.token){
-                    this.$router.push({name: 'UserClinet'});
+                    this.$router.push({name: 'dashboard'});
                 }
             }
         },

@@ -1,0 +1,9 @@
+@font-face {
+  font-family: Vazir;
+  font-style: normal;
+  font-weight: normal;
+  src: url('./Farsi-Digits/Vazir-FD.eot'),
+  url('./Farsi-Digits/Vazir-FD.woff2') format('woff2'),  /* FF39+,Chrome36+, Opera24+*/
+  url('./Farsi-Digits/Vazir-FD.woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+  url('./Farsi-Digits/Vazir-FD.ttf') format('truetype');
+}

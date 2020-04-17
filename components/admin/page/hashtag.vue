@@ -54,6 +54,12 @@
         },
         mounted() {
             this.loadtags();
+        },
+        head () {
+            return {
+                title: this.$t('tags'),
+
+            }
         }
     }
 </script>

@@ -382,7 +382,14 @@
             this.loadarticle(window.location.hash.substring(1).split('#')[1]);
 
 
+        },
+        head () {
+            return {
+                title: this.$t('ArticleList'),
+
+            }
         }
+
 
     }
 </script>

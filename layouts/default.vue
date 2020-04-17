@@ -1,15 +1,17 @@
 <template>
   <div>
-
     <nuxt />
-    <v-select  />
-
   </div>
 </template>
 
 <style>
   @import "~/assets/icofont/icofont.min.css";
+  @import "~/assets/IranSans/iransans.css";
+  @import "~/assets/main.css";
 
+  html *{
+    font-family: IRANSans;
+  }
   html {
   font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
     Roboto, 'Helvetica Neue', Arial, sans-serif;
@@ -59,7 +61,6 @@
 }
 
 
-html *{font-family: Samim;}
 
 ::-webkit-scrollbar{width:9px}::-webkit-scrollbar-track{background:#cccccc;border-radius:2px}::-webkit-scrollbar-thumb{background:#000000;border-radius:-2px}
 

@@ -1,13 +1,24 @@
 <template>
   <div >
 
-    <div class="row headeofpage">
-      <div class="col-sm-2 settingbar">
-        <a class="icon-rotate mr-2 icofont-gear-alt"></a>
-        <a class="icon-rotate mr-2 icofont-notification"></a>
+    <div class="row  w-100">
+
+      <div class="col-sm-4 settingbar">
+        <a class="icon-rotate mr- "  @click="openmenu">
+          <span class="icofont-navigation-menu"></span>
+          <span v-text="$t('Access')" style="font-size: 18px;"></span>
+        </a>
+        <a class="ml-4"  href="/logout">
+          <span class="icofont-logout text-danger" title="exit"></span>
+
+        </a>
+        <a class="ml-4"  href="/">
+          <span class="icofont-eye " title="showwebsite"></span>
+
+        </a>
 
       </div>
-      <div class="col-sm-8 text-right pt-3 text-dark"  dir="rtl" style="margin-right: -20px;">
+      <div class="col-sm-6 text-right pt-3 text-dark"  dir="rtl" style="margin-right: -20px;">
         <span class="icofont-ui-user p-4"></span>
         <span v-text="user.name"></span> <span v-if="user.lastname" v-text="user.lastname"></span> {{ $t('wellcome')}}
 
@@ -22,42 +33,45 @@
         </div>
       </div>
     </div>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light" dir="rtl">
-      <a class="navbar-brand" href="#">Navbar</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+    <modal   scrollable="true"   height="auto" name="fastmenu" dir="ltr" :key="'mainmenu'"  >
+      <div class="modal-header text-right" dir="rtl" >
+        <span class="icofont-close-circled icofont-2x tiss-cursur"  @click="hidemenu()"></span>
+      </div>
+      <div class="modal-content text-right"  dir="rtl">
 
-      <div class="collapse navbar-collapse" id="navbarSupportedContent" >
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Dropdown
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#">Disabled</a>
-          </li>
-        </ul>
+        <div class="row p-3">
+      <template v-for="(item,index) in menu">
+
+
+          <div class="col-sm-4 col-xs-12 wlistapplication"   v-if="item.child" :key="index">
+          <ul class="fastaccess">
+            <li > <strong><span  :class="item.icon + ' headerwicon'"></span>  {{ item.title }}</strong> </li>
+            <template  v-if="item.child">
+              <li v-for="(menu,index) in item.child" :key="index" dir="rtl"  >
+                <a :href="menu.href" class="nolink" @click="hidemenu()">
+                  <span :class="menu.icon"></span> |  <span v-text="menu.title"></span>
+                </a>
+
+              </li>
+
+
+            </template>
+
+          </ul>
+        </div>
+      </template>
+        </div>
 
       </div>
-    </nav>
-    <div class="col-sm-12  mainback">
-
+    </modal>
+    <div class="myback  ">
      <component :is="dynamicComponent"></component>
     </div>
+    <footer class="footer">
+      <div class="container">
+        <span class="text-muted " style="font-family: Arial;">TissEngine 2.1 &copy; NuxtVue Edition - 2020 </span>
+      </div>
+    </footer>
    </div>
 </template>
 
@@ -73,22 +87,14 @@
     import articlelist from "../components/admin/blog/articlelist";
     import post from "../components/admin/user/post";
     import users from "../components/admin/user/users";
+    import menus from '../components/admin/tools/menus';
     // Product Manager
     import Attributes from "../components/admin/Product/Attributes.vue";
     import feature from  "../components/admin/Product/Feature";
     import color from "../components/admin/Product/color";
     import product from "../components/admin/Product/productdetail";
     import productgroup from "../components/admin/Product/productgroup";
-    /*  import menus from "./admin/menu";
 
-
- import setting from "./setting/setting";
- import contactus from "./setting/contactus";
- import gallery from "./gallery/gallerygroup";
-
-
- import firstpage from "./setting/firstpage";
- import layoutproduct from "./Product/layoutproduct";*/
 
     export default {
 
@@ -109,7 +115,8 @@
             feature,
             color,
             productgroup,
-            product
+            product,
+            menus
         },
         data(){
             return{
@@ -320,6 +327,7 @@
                             },
                         ]
                     },
+
                 ],
                 dynamicComponent:'dashborad'
 
@@ -327,6 +335,12 @@
         },
 
         methods:{
+            openmenu(){
+                this.$modal.show('fastmenu')
+            },
+            hidemenu(){
+                this.$modal.hide('fastmenu')
+            },
             profileshow(){
                 let that=this;
 
@@ -355,6 +369,7 @@
             }
         },
         mounted() {
+
             if(!localStorage.token){
                 $nuxt.$router.push({name: 'login'});
             }
@@ -365,22 +380,43 @@
 
                 this.dynamicComponent='dashboradmenus';
             }
+        },
+        head () {
+            return {
+                title: this.$t('dashboard'),
+                script: [
+                    {
+                        src: process.env.BASE_BACKEND+"asset/jquery/jquery-3.5.0.min.js",
+
+                        type: "text/javascript"
+                    },
+                    {
+                        src: process.env.BASE_BACKEND+"asset/jquery/popper.min.js",
+                        type: "text/javascript"
+                    },
+                    {
+                        src:process.env.BASE_BACKEND+"asset/jquery/bootstrap.min.js",
+                        type: "text/javascript"
+                    }
+                ]
+            }
         }
 
     }
 </script>
 
 <style scoped>
-  .mainback{
-    background-color: #e8e8e8;
-    height: 100%;
-    padding-bottom: 100%;
+  .myback{
+    background: rgb(223,223,223);
+    background: linear-gradient(180deg, rgba(223,223,223,1) 0%, rgba(255,255,255,1) 100%);
+
+
   }
   .bg-gray{
     background-color: #cdcdc9;
-    height:100%;
+
     color: #fff;
-    min-height: 500px;
+
   }
   .bg-blue-dark{
     background-color: #367FA9;;
@@ -400,14 +436,13 @@
 
   }
   .settingbar{
-    padding-top: 20px;
+    padding-top: 10px;
     padding-left: 50px;
   }
   .settingbar *{
-    font-size: 25px;
-    color:transparent;
-    -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: #333;
+    font-size: 22px;
+    color:#333333;
+
     cursor: pointer;
 
 
@@ -443,12 +478,37 @@
   .wmaster{
     margin-top: 8px;
     background-color: #ffff;
-    height: 200px;
+
     -webkit-box-shadow: -4px 6px 5px -4px rgba(176,173,176,1);
     -moz-box-shadow: -4px 6px 5px -4px rgba(176,173,176,1);
     box-shadow: -4px 6px 5px -4px rgba(176,173,176,1);
     border-radius: 15px;
     overflow: hidden;
 
+  }
+  .footer {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    background-color: #f5f5f5;
+    margin-top: 100px;
+  }
+  .nolink{
+    list-style: none;
+    color: #2970e0;
+    line-height: 12px;
+    color: #425653;
+  }
+  .nolink:hover{
+    list-style: none;
+    text-decoration: none;
+    font-weight: bold;
+    color: #425653;
+    line-height: 12px;
+  }
+  .fastaccess li{
+    list-style: none;
   }
 </style>

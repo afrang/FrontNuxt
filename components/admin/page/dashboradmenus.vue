@@ -5,9 +5,6 @@
         <widgets  v-for="(item,index) in $parent.menu" :key="index" :menu="item" class="col-sm-3"></widgets>
       </div>
       <hr>
-
-
-
     </div>
   </div>
 
