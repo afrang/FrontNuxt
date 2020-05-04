@@ -94,6 +94,8 @@
     import color from "../components/admin/Product/color";
     import product from "../components/admin/Product/productdetail";
     import productgroup from "../components/admin/Product/productgroup";
+    import citypost from "../components/admin/postandpay/citypost";
+    import postprice from "../components/admin/postandpay/postprice";
 
 
     export default {
@@ -116,7 +118,10 @@
             color,
             productgroup,
             product,
-            menus
+            menus,
+            citypost,
+            postprice
+
         },
         data(){
             return{
@@ -327,7 +332,25 @@
                             },
                         ]
                     },
+                    {
+                        href: '',
+                        title: this.$t('payandinvoicesetting'),
+                        icon: 'icofont-gear',
+                        child: [
+                            {
+                                icon: 'icofont-verification-check',
+                                href: '#citypost',
+                                title: this.$t('citysetting')
+                            },
+                            {
+                                icon: 'icofont-verification-check ',
+                                href: '#postprice',
+                                title: this.$t('postprice')
+                            },
 
+
+                        ]
+                    },
                 ],
                 dynamicComponent:'dashborad'
 
@@ -347,7 +370,12 @@
                 this.$axios.get(this.$url+'user/profile',{headers:{Authorization:localStorage.token}})
                     .then(function (response) {
                         that.user=response.data;
-                    });
+                        if(response.data.roll==null){
+                            $nuxt.$router.push({name: 'profile'});
+                        }
+                    }) .catch((error) => {
+                    console.log(error.data);
+                });
 
 
             },

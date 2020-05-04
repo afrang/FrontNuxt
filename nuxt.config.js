@@ -31,10 +31,12 @@ module.exports = {
   */
   plugins: [
     '~/plugins/i18n.js',
+    '~/plugins/map.js',
     '~/plugins/other.js',
         { src: '~plugins/ckeditor.js', ssr: false },
     { src: '~plugins/vmodal.js', ssr: false },
     { src: '~plugins/ssrfalse.js', ssr: false },
+
   ],
   /*
   ** Nuxt.js dev-modules
@@ -64,11 +66,13 @@ module.exports = {
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
+
   },
   /*
   ** Build configuration
   */
   build: {
+
 
     /*
     ** You can extend webpack config here

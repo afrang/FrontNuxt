@@ -1,29 +1,47 @@
 <template>
   <div>
-    <div id="logreg-forms">
-      <form class="form-signin" @submit.prevent="loginuser">
-        <h1 class="h3 mb-3 font-weight-normal" style="text-align: center">     <h1>{{ $t('signin') }}</h1>
-        </h1>
-
-        <input type="text" v-model="user.email" id="inputEmail" class="form-control text-center" :placeholder="$t('Email_or_phone')"  autofocus="">
-        <input type="password" v-model="user.password" id="inputPassword" class="form-control text-center" :placeholder="$t('Password')" >
-
-        <button class="btn btn-success btn-block" type="submit"><i class="fas fa-sign-in-alt"></i>  {{ $t('Signin') }} </button>
-        <a href="#" id="forgot_pswd" v-text="$t('Forgotpassword')"></a>
-        <hr>
-        <!-- <p>Don't have an account!</p>  -->
-<!--
-        <router-link class="btn btn-primary btn-block  text-white"  type="button"  to="register"><i class="fas fa-user-plus"></i> {{ $t('SignupNewAccount') }} </router-link>
--->
-
-      </form>
-      <p style="text-align:center">{{ $t('OR') }}   </p>
-
-      <div class="social-login pb-5">
-
-        <button class="btn google-btn social-btn w-100 "  type="button"><span><i class="fab fa-google-plus-g"></i> <span v-text="$t('Sign_in_with_Google')"></span></span> </button>
+    <div class="loginbox animated ">
+      <div class="lheader w-100">
+        <img :src="$storage+'asset/icon/registerbanner.jpg'"  width="100%" >
       </div>
+      <div class="ilogininput text-center w-100 pt-4" >
+        <form @submit.prevent="save">
+          <div class="text-center">
+            <h4 v-text='$t("loginmember")'></h4>
+            <hr>
+          </div>
+          <div class="form-group text-center " >
+            <label v-text="$t('phone')"></label>
+            <div class="input-container">
+              <i class="icofont-phone-circle icofont-2x icon"></i>
+              <input aria-activedescendant="phoneHelp" class="input-field text-center" v-model="user.email"  type="text" placeholder="09XXXXXXXXX" >
+            </div>
+            <small v-if="error" id="phoneHelp" class="form-text text-muted">
+              <span v-if="error.email" v-text="$t(error.email[0])" ></span>
+            </small>
 
+
+          </div>
+          <div class="form-group text-center " >
+            <label v-text="$t('password')"></label>
+            <div class="input-container">
+              <i v-if="type=='password'" @click="type='text'" :title="$t('showpassword')" class="icofont-eye icofont-2x icon"></i>
+              <i v-if="type=='text'" @click="type='password'"  :title="$t('hidepassword')"  class="icofont-eye-blocked icofont-2x icon"></i>
+              <input aria-activedescendant="passwordHelp" class="input-field text-center"  v-model="user.password"  :type="type" placeholder="*******" name="email">
+            </div>
+            <small v-if="error" id="passwordHelp" class="form-text text-muted">
+              <span v-if="error.password" v-text="$t(error.password[0])" ></span>
+            </small>
+
+          </div>
+
+          <input type="submit" class="btn btn-yellow mt-4" :value="$t('Login')">
+        </form>
+        <div class="mt-4">
+          <a href="/register" class="mt-5" style="font-size: 14px;" v-html="$t('register')"></a>
+
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -36,9 +54,11 @@
             return {
                 token:null,
                 user:{
-                    email:'afrangart@gmail.com',
-                    password:'13660205'
-                }
+                    email:null,
+                    password:null
+                },
+                error:null,
+                type:'password'
             }
         },
         watch: {
@@ -46,12 +66,12 @@
 
                 localStorage.token ='Bearer '+newName;
                 if(localStorage.token){
-                    this.$router.push({name: 'dashboard'});
+                    this.$router.push({name: 'profile'});
                 }
             }
         },
         methods:{
-            loginuser(){
+            save(){
                 let that=this;
                 this.$axios.post(this.$url+'loginuser',this.user)
                     .then(function (response) {
@@ -64,7 +84,7 @@
         },
         mounted() {
             if(localStorage.token){
-                $nuxt.$router.push({name: 'dashboard'});
+                $nuxt.$router.push({name: 'profile'});
             }
         }
 
@@ -72,5 +92,88 @@
 </script>
 
 <style>
+  .loginbox * h4{
+    font-size: 25px;
+  }
+  .l-back{
+    text-align: center;
 
+
+  }
+  .l-back * label
+  {
+    font-size: 16px;
+  }
+  .loginbox{
+    margin-right: auto;
+    margin-left: auto;
+    width: 30%;
+
+
+    margin-top: 10em;
+    background-color: #ffffff;
+
+    -webkit-box-shadow: -2px 6px 80px -15px rgba(219,219,219,1);
+    -moz-box-shadow: -2px 6px 80px -15px rgba(219,219,219,1);
+    box-shadow: -2px 6px 80px -15px rgba(219,219,219,1);
+    border-radius: 15px;
+
+
+
+  }
+  * {box-sizing: border-box;}
+
+  /* Style the input container */
+  .input-container {
+    display: flex;
+    width: 100%;
+    margin-bottom: 15px;
+
+  }
+
+  /* Style the form icons */
+  .icon {
+    padding: 10px;
+    background: #feff14;
+    color: #151515;
+    min-width: 50px;
+    text-align: center;
+  }
+
+  /* Style the input fields */
+  .input-field {
+    width: 100%;
+    padding: 10px;
+    outline: none;
+  }
+
+  .input-field:focus {
+    border: 2px solid dodgerblue;
+  }
+
+  /* Set a style for the submit button */
+  .btn {
+    background-color: dodgerblue;
+    color: white;
+    padding: 15px 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+  }
+
+  .btn:hover {
+    opacity: 1;
+  }
+  .lheader{
+
+    background-color: black;
+  }
+  .ilogininput{
+    padding: 25px;
+  }
+  .btn-yellow{
+    background-color: #333333;
+    color: #f2ea1b;
+  }
 </style>

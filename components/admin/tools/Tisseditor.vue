@@ -226,18 +226,21 @@
         },
         watch: {
             vtext:function (val) {
-                this.$emit('myevent', val.replace(this.$storage,'%url%'));
+                if(val!=null){
+                    this.$emit('myevent', val.replace(this.$storage,'%url%'));
+
+                }
             }
         },
         data() {
             return {
                 editorConfig: {
+                    language:'fa',
                     extraPlugins: ['bidi','justify','colorbutton','autoembed','balloontoolbar']
                 },
 
-              //  editorUrl:this.$storage+'js/ckeditor/ckeditor.js',
 
-                vtext:null,
+              vtext:null,
                 aparat:null,
                 code:null,
                 listfile:{},
@@ -398,6 +401,7 @@
         },
         beforeUpdate: function () {
             if(this.vtext!=null){
+
                 this.vtext=this.text.replace('%url%',this.$storage);
 
             }
