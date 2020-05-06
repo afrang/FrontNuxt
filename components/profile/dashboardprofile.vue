@@ -43,32 +43,32 @@
                 menu:{
                     0:{
                         name:'dashboard',
-                        link:'profile',
+                        link:'/profile',
                         icon:'icofont-dashboard-web'
                     },
                     1:{
                         name:'orders',
-                        link:'profile/orders',
+                        link:'/profile/orders',
                         icon:'icofont-list'
                     },
                     2:{
                         name:'favlist',
-                        link:'profile/comments',
+                        link:'/profile/comments',
                         icon:'icofont-heart'
                     },
                     3:{
                         name:'giftcard',
-                        link:'profile/giftard',
+                        link:'/profile/giftard',
                         icon:'icofont-gift'
                     },
                     4:{
                         name:'address',
-                        link:'profile/address',
+                        link:'/profile/address',
                         icon:'icofont-location-pin'
                     },
                     5:{
                         name:'profile',
-                        link:'profile/setting',
+                        link:'/profile/setting',
                         icon:'icofont-location-pin'
                     }
                 }
@@ -108,8 +108,7 @@
   .mynavbar{
     background-color: red;
 
-    position: absolute;
-    width: 250px;
+    width: 100%;
     overflow: hidden;
     float: right;
     right: 0px;
@@ -161,7 +160,7 @@
     border: solid #a3a3a3;
     padding: 10px;
     font-size: 22px;
-    color: #FFFF33  !important;
+    color: #ffdd00  !important;
     border-radius: 90%;
     background-color: #a3a3a3;
   }
@@ -174,7 +173,7 @@
     margin-top: -3px;
   }
   .myprfilethumpnail{
-    background-color: yellow;
+    background-color: #ffdd00;
     border-bottom:10px solid #676767;
 
 

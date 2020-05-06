@@ -50,16 +50,19 @@
           </tr>
           </tbody>
         </table>
-        <paginate
-          :page-count="articlelist.meta.from"
-          :page-range="3"
-          :margin-pages="2"
-          :click-handler="clickCallback"
-          :prev-text="$t('Prev')"
-          :next-text="$t('Next')"
-          :container-class="'pagination'"
-          :page-class="'page-item'">
-        </paginate>
+        <template v-if="articlelist!=null">
+          <paginate
+            :page-count="articlelist.meta.last_page"
+            :page-range="articlelist.meta.per_page"
+            :margin-pages="2"
+            :click-handler="clickCallback"
+            :prev-text="$t('Prev')"
+            :next-text="$t('Next')"
+            :container-class="'pagination'"
+            :page-class="'page-item'">
+          </paginate>
+        </template>
+
 
       </div>
       <div v-if="method=='additem'">

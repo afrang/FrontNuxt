@@ -23,6 +23,7 @@
                 factordetail:null
             }
         },
+
         methods:{
             profileshow(){
                 let that=this;

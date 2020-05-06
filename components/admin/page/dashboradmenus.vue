@@ -2,7 +2,7 @@
   <div>
     <div class="row" >
       <div class="col-sm-11 row">
-        <widgets  v-for="(item,index) in $parent.menu" :key="index" :menu="item" class="col-sm-3"></widgets>
+        <widgets  v-for="(item,index) in $parent.menu" :key="13000+index" :menu="item" class="col-sm-3"></widgets>
       </div>
       <hr>
     </div>

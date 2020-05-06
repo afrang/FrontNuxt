@@ -58,7 +58,7 @@
            height="auto"
            :transition="'fade'"
            :top="0"
-           scrollable="true"
+           :scrollable="true"
     >
       <span @click="hide" class="badge badge-dark"><span class="icofont icofont-close icofont-3x"></span></span>
       <dropzone  @vdropzone-complete="showitem"  ref="myVueDropzone" id="dropzone" :options="dropzoneOptions"></dropzone>
@@ -129,8 +129,10 @@
         </template>
       </div>
     </modal>
+    <no-ssr>
+      <ckeditor   v-model="vtext" :config="editorConfig"></ckeditor>
 
-    <ckeditor  :editorUrl="editorUrl"  v-model="vtext" :config="editorConfig"></ckeditor>
+    </no-ssr>
     <a @click="apartshow" class="btn text-white btn-sm btn-dark m-1">{{ $t('Aparat')}} | <span class="icofont-ui-movie"></span>  </a>
     <a @click="codeshow"  class="btn  text-white btn-sm btn-dark m-1">{{ $t('embedcode')}} | <span class="icofont-code"></span> </a>
     <a @click="show" class="btn text-white btn-dark btn-sm m-1">{{ $t('filemanager')}} | <span class="icofont-folder-open"></span> </a>
@@ -199,6 +201,10 @@
                 type: Number,
                 default: 200
             },
+            componentkey: {
+                type: Number,
+                default: 1
+            },
             text:{
                 type:String,
                 default:''
@@ -236,9 +242,9 @@
             return {
                 editorConfig: {
                     language:'fa',
-                    extraPlugins: ['bidi','justify','colorbutton','autoembed','balloontoolbar']
+                    extraPlugins: ['justify','colorbutton','autoembed','balloontoolbar']
                 },
-
+      // why bibi
 
               vtext:null,
                 aparat:null,

@@ -3,7 +3,7 @@
     <!-- Modal -->
 
     <div class="wmaster text-right" dir="rtl">
-      <modal   scrollable="true"   height="auto" name="edirprice" dir="ltr" :key="'mip2'"  >
+      <modal   :scrollable="true"   height="auto" name="edirprice" dir="ltr" :key="'mip2'"  >
         <div class="modal-content" v-if="editprice!=null">
           <div class="modal-body text-right">
             <label v-text="$t('price')"></label>
@@ -17,7 +17,7 @@
         </div>
 
       </modal>
-      <modal   scrollable="true"   height="auto" name="editfeature" dir="ltr" :key="'mi2'"  >
+      <modal   :scrollable="true"   height="auto" name="editfeature" dir="ltr" :key="'mi2'"  >
         <div class="modal-content" v-if="editfeature!=null">
           <div class="modal-header text-right" dir="rtl" >
             <span v-text="editfeature.to_attr.name" ></span>
@@ -50,7 +50,7 @@
           </div>
         </div>
       </modal>
-      <modal   scrollable="true"   height="auto" name="hello-world" dir="ltr" :key="'mi'"  >
+      <modal   :scrollable="true"   height="auto" name="hello-world" dir="ltr" :key="'mi'"  >
         <div class="modal-content">
           <div class="modal-header text-right" >
             <h5 class="modal-title text-right w-100" dir="rtl" v-text="$t('coloroption')"></h5>

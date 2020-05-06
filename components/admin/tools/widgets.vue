@@ -34,7 +34,6 @@
         name: "widgets",
         props:{
             menu:{
-                type: Array
             },
             headcolor: {
                 type: String,

@@ -57,7 +57,10 @@
           </div>
           <hr>
           <template v-if="blog.id">
-            <tisseditor  :text="blog.text"
+            <tisseditor
+              :key="componentkey"
+              :keynumber="componentkey"
+              :text="blog.text"
                          v-on:myevent="doSomething"
                          :mode="'BlogGroup'"></tisseditor>
 
@@ -99,6 +102,7 @@
         },
         data(){
             return {
+                componentkey:1,
                 error:[],
                 tag:'',
                 groupselect:null,
@@ -180,6 +184,8 @@
                 };
             },
             edit(id){
+                this.componentkey=this.componentkey+1;
+
                 this.blog=this.list[id];
                 this.tags=this.taggenerator;
                 this.method='additem';
@@ -233,6 +239,7 @@
 
             },
             additem(){
+                this.componentkey=this.componentkey+1;
                 this.resetform();
                 this.method='additem';
 

@@ -313,7 +313,6 @@
       </div>
 
     </template>
-    <pre>{{ product }}</pre>
     <Footers class="mt-40"></Footers>
   </div>
 </template>

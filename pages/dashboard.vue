@@ -33,7 +33,7 @@
         </div>
       </div>
     </div>
-    <modal   scrollable="true"   height="auto" name="fastmenu" dir="ltr" :key="'mainmenu'"  >
+    <modal   :scrollable="true"   height="auto" name="fastmenu" dir="ltr" :key="'mainmenu'"  >
       <div class="modal-header text-right" dir="rtl" >
         <span class="icofont-close-circled icofont-2x tiss-cursur"  @click="hidemenu()"></span>
       </div>
@@ -96,7 +96,9 @@
     import productgroup from "../components/admin/Product/productgroup";
     import citypost from "../components/admin/postandpay/citypost";
     import postprice from "../components/admin/postandpay/postprice";
-
+    // invoices
+   import invoices from "../components/admin/invoices/invoices";
+    import invoiceshow from "../components/admin/invoices/invoiceshow";
 
     export default {
 
@@ -120,7 +122,9 @@
             product,
             menus,
             citypost,
-            postprice
+            postprice,
+            invoices,
+            invoiceshow
 
         },
         data(){
@@ -312,24 +316,10 @@
                         child: [
                             {
                                 icon: 'icofont-verification-check',
-                                href: '#newinvoice',
-                                title: this.$t('newinvoice')
+                                href: '#invoices',
+                                title: this.$t('invoices')
                             },
-                            {
-                                icon: 'icofont-verification-check ',
-                                href: '#archiveinvoice',
-                                title: this.$t('archiveinvoice')
-                            },
-                            {
-                                icon: 'icofont-verification-check ',
-                                href: '#cancelinvoice',
-                                title: this.$t('cancelinvoice')
-                            },
-                            {
-                                icon: 'icofont-verification-check ',
-                                href: '#findinvoice',
-                                title: this.$t('findinvoice')
-                            },
+
                         ]
                     },
                     {
@@ -352,7 +342,7 @@
                         ]
                     },
                 ],
-                dynamicComponent:'dashborad'
+                dynamicComponent:'dashboradmenus'
 
             }
         },
@@ -413,7 +403,7 @@
             return {
                 title: this.$t('dashboard'),
                 script: [
-                    {
+                  /*  {
                         src: process.env.BASE_BACKEND+"asset/jquery/jquery-3.5.0.min.js",
 
                         type: "text/javascript"
@@ -425,7 +415,7 @@
                     {
                         src:process.env.BASE_BACKEND+"asset/jquery/bootstrap.min.js",
                         type: "text/javascript"
-                    }
+                    }*/
                 ]
             }
         }
